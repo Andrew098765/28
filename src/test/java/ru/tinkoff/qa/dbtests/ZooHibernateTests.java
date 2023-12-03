@@ -1,8 +1,15 @@
 package ru.tinkoff.qa.dbtests;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import org.hibernate.Session;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import ru.tinkoff.qa.dbmodels.Animal;
 import ru.tinkoff.qa.hibernate.BeforeCreator;
+import ru.tinkoff.qa.hibernate.HibernateSessionFactoryCreator;
+
 
 public class ZooHibernateTests {
 
@@ -16,7 +23,14 @@ public class ZooHibernateTests {
      */
     @Test
     public void countRowAnimal() {
-        assert false;
+
+        Session session = HibernateSessionFactoryCreator.createSessionFactory().openSession();
+        CriteriaBuilder qb = session.getCriteriaBuilder();
+        CriteriaQuery<Long> cq = qb.createQuery(Long.class);
+        cq.select(qb.count(cq.from(Animal.class)));
+        Long singleResult = session.createQuery(cq).getSingleResult();
+        session.close();
+        Assertions.assertEquals(singleResult, 10);
     }
 
     /**
