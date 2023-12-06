@@ -2,25 +2,60 @@ package ru.tinkoff.qa.dbmodels;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "animal")
-public class Animal
-{
+public class Animal {
     @Id
-    Integer id;
-    @Column(name = "name")
-    String name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+    @Column(name = "\"name\"")
+    private String name;
     @Column(name = "age")
-    Integer age;
-    @Column(name = "type")
-    Integer type;
-    @Column(name = "sex")
-    Integer sex;
-    @Column(name = "place")
-    Integer place;
+    private Integer age;
+
+    @ManyToOne
+    @JoinColumn(name = "\"type\"", referencedColumnName = "id")
+    private Types type;
+
+    @ManyToOne
+    @JoinColumn(name = "sex", referencedColumnName = "id")
+    private Sex sex;
+
+    @ManyToOne
+    @JoinColumn(name = "place", referencedColumnName = "id")
+    private Places place;
+
+    public Animal() {
+    }
+
+    public Animal(Integer id, String name, Integer age, Types type, Sex sex, Places place) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.type = type;
+        this.sex = sex;
+        this.place = place;
+    }
+
+    @Override
+    public String toString() {
+        return "Animal{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", type=" + type +
+                ", sex=" + sex +
+                ", place=" + place +
+                '}';
+    }
 
     public Integer getId() {
         return id;
@@ -46,27 +81,28 @@ public class Animal
         this.age = age;
     }
 
-    public Integer getType() {
+    public Types getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(Types type) {
         this.type = type;
     }
 
-    public Integer getSex() {
+    public Sex getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 
-    public Integer getPlace() {
+    public Places getPlace() {
         return place;
     }
 
-    public void setPlace(Integer place) {
+    public void setPlace(Places place) {
         this.place = place;
     }
+
 }

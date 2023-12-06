@@ -15,6 +15,7 @@ public class PetsApiTests {
     PetRequest petRequest;
     @BeforeEach
     public void init(){
+        petRequest = new PetRequest();
         PetBuilder builder = new PetBuilder(1461681516);
         builder.setName("dog");
         builder.setStatus("available");

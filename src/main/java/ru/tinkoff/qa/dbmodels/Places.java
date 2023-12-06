@@ -1,9 +1,6 @@
 package ru.tinkoff.qa.dbmodels;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.beans.ConstructorProperties;
 
@@ -11,14 +8,15 @@ import java.beans.ConstructorProperties;
 @Table(name = "places")
 public class Places {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Integer id;
+    private Integer id;
     @Column(name = "row")
-    Integer row;
+    private Integer row;
     @Column(name = "placeNum")
-    Integer placeNum;
-    @Column(name = "name")
-    String name;
+    private Integer placeNum;
+    @Column(name = "\"name\"")
+    private String name;
 
     public Integer getId() {
         return id;

@@ -1,18 +1,16 @@
 package ru.tinkoff.qa.dbmodels;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "sex")
 public class Sex {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Integer id;
-    @Column(name = "name")
-    String name;
+    private Integer id;
+    @Column(name = "\"name\"")
+    private String name;
 
     public Integer getId() {
         return id;

@@ -1,22 +1,21 @@
 package ru.tinkoff.qa.dbmodels;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "workman")
 public class Workman {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Integer id;
-    @Column(name = "name")
-    String name;
+    private Integer id;
+    @Column(name = "\"name\"")
+    private String name;
     @Column(name = "age")
-    Integer age;
-    @Column(name = "position")
-    Integer position;
+    private Integer age;
+    @ManyToOne
+    @JoinColumn(name = "position", referencedColumnName = "id")
+    private Positions position;
 
     public Integer getId() {
         return id;
@@ -42,11 +41,11 @@ public class Workman {
         this.age = age;
     }
 
-    public Integer getPosition() {
+    public Positions getPosition() {
         return position;
     }
 
-    public void setPosition(Integer position) {
+    public void setPosition(Positions position) {
         this.position = position;
     }
 }

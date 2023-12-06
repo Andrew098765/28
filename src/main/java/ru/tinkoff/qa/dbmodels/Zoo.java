@@ -1,23 +1,30 @@
 package ru.tinkoff.qa.dbmodels;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
-@Entity
+@Entity()
 @Table(name = "zoo")
-public class Zoo {
+public class Zoo implements java.io.Serializable{
     @Id
-    int id;
-    @Column(name = "name")
-    String name;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+    @Column(name = "\"name\"")
+    private String name;
 
-    public int getId() {
+    public Zoo() {
+    }
+
+    public Zoo(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
